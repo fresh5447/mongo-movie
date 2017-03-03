@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 var filmRouter = require('./routes/films');
+var actorRouter = require('./routes/actors');
 
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/mongoMovie");
@@ -17,6 +18,7 @@ app.get('/test', function(req, res){
 });
 
 app.use('/api/films', filmRouter);
+app.use('/api/actors', actorRouter);
 
 app.listen(app.get('port'), function(){
   console.log(`🔥🔥🔥🔥🔥🔥 at: http://localhost:${app.get('port')}/`);
