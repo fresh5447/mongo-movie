@@ -4,7 +4,9 @@ var Actor = require('../models/actor');
 
 Router.route('/')
   .get(function(req, res) {
-    Actor.find(function(err, actors) {
+    Actor.find()
+    .populate('films')
+    .exec(function(err, actors) {
       if(err){
         console.log(err, "error getting all actors")
       } else {
@@ -27,7 +29,9 @@ Router.route('/')
 
 Router.route('/:actor_id')
   .get(function(req, res) {
-    Actor.findById(req.params.actor_id, function(err, actor) {
+    Actor.findById(req.params.actor_id)
+    .populate('films')
+    .exec(function(err, actor) {
       if(err){
         console.log(err, "error finding that actor");
       } else {
